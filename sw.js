@@ -1,6 +1,6 @@
 // Service worker: guarda o app no aparelho para funcionar offline.
 // Se alterar o index.html no futuro, aumente o número da versão abaixo.
-const CACHE = "aulas-reforco-v2";
+const CACHE = "aulas-reforco-v3";
 const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
