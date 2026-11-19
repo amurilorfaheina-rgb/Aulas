@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f5d2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Aulas">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Aulas e Reforço</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f0e1;--card:#fffaf0;--ink:#2e3320;--mut:#6d6a50;--pri:#4f5d2a;--acc:#6b7d36;--ora:#c9a227;--line:#ddd4b8;--chip:#e7e6c6;--onpri:#f6f0e1;color-scheme:light}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.4 Arial,Helvetica,sans-serif;min-height:100%;padding-bottom:88px}
+header{background:var(--pri);color:var(--onpri);padding:18px 16px 14px}
+h1{margin:0;font-size:21px}
+.sub{margin-top:4px;font-size:13px;opacity:.85}
+nav{display:flex;background:var(--pri);padding:0 8px}
+nav button{flex:1;background:none;border:0;border-bottom:3px solid transparent;color:var(--onpri);opacity:.7;font:inherit;font-weight:700;padding:10px 0}
+nav button.on{opacity:1;border-color:var(--ora)}
+main{padding:14px 14px 0;max-width:640px;margin:0 auto}
+.flt{display:flex;gap:8px;margin-bottom:10px}
+input,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;min-width:0}
+.flt select{width:120px;flex:none}
+.tot{font-size:13px;color:var(--mut);margin:0 2px 8px}
+.it{display:flex;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:8px;width:100%;text-align:left;color:var(--ink);font:inherit}
+.it b{display:block}
+.it small{color:var(--mut)}
+.chip{display:inline-block;font-size:12px;border-radius:99px;padding:1px 8px;background:var(--chip);color:var(--ink);margin-right:6px}
+.chip.r{background:var(--ora);color:#1b1b1b}
+.val{text-align:right;white-space:nowrap}
+.val b{color:var(--acc)}
+.empty{text-align:center;color:var(--mut);padding:36px 12px}
+.note{font-size:12px;color:var(--mut);margin:10px 2px}
+.dr{align-items:flex-end}.dr>div{flex:1;min-width:0}.dr label{margin:0 0 3px}
+.clr{flex:none;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.mh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-weight:700;color:var(--pri);margin:14px 2px 6px;font-size:14px}
+.mh small{color:var(--mut);font-weight:400;font-size:12px;text-align:right}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;border:0;background:var(--ora);color:#1b1b1b;font-size:32px;line-height:1;box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.yr{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px}
+.yr button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px}
+.yr b{font-size:24px;min-width:70px;text-align:center}
+.pie{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.disc{width:112px;height:112px;border-radius:50%;flex:none;position:relative}
+.disc::after{content:"";position:absolute;inset:26px;background:var(--card);border-radius:50%}
+.lg div{margin:4px 0}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 7px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{background:var(--acc);color:#fffaf0;font-size:12px}
+td.z{color:var(--mut)}
+tfoot td{font-weight:700;background:var(--pri);color:var(--onpri);border:0}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:5}
+.ov[hidden]{display:none}
+.sheet{background:var(--bg);width:100%;max-width:520px;max-height:92%;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.sheet h2{margin:0 0 10px;font-size:18px}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+.two{display:flex;gap:10px}.two>div{flex:1}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.seg button.on{background:var(--acc);color:#fffaf0;border-color:var(--acc);font-weight:700}
+.gain{margin:14px 0 4px;font-size:16px}.gain b{color:var(--acc);font-size:20px}
+.err{color:#a23b2a;font-size:13px;min-height:18px;margin:4px 0}
+.btns{display:flex;gap:8px;margin-top:6px}
+.btns button{flex:1;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700}
+.btns .ok{background:var(--pri);color:#f6f0e1;border-color:var(--pri)}
+.btns .del{color:#a23b2a}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--ora);outline-offset:1px}
+</style></head><body>
+<header><h1>📚 Aulas e Reforço</h1><div class="sub" id="sub"></div></header>
+<nav><button data-t="a" class="on">Aulas</button><button data-t="f">Fechamento</button></nav>
+<main id="v"></main>
+<button class="fab" id="fab" aria-label="Nova aula">+</button>
+<div class="ov" id="ov" hidden><div class="sheet">
+<h2 id="ttl">Nova aula</h2>
+<label for="fd">Data</label><input id="fd" type="date">
+<label for="fn">Nome do aluno ou turma</label><input id="fn" list="dn" maxlength="60" autocomplete="off">
+<label>Particular ou Reforço</label>
+<div class="seg" id="ft2"><button data-v="Particular" class="on">Particular</button><button data-v="Reforço">Reforço</button></div>
+<label for="fm">Matéria</label><input id="fm" list="dm" maxlength="60" autocomplete="off">
+<div class="two"><div><label for="fh">Horas</label><input id="fh" type="number" step="any" inputmode="decimal" placeholder="1,5"></div>
+<div><label for="fv">Valor da hora (R$)</label><input id="fv" type="number" step="any" inputmode="decimal" placeholder="80"></div></div>
+<div class="gain">Valor ganho: <b id="g">R$ 0,00</b></div>
+<div class="err" id="err"></div>
+<div class="btns"><button id="bc">Cancelar</button><button id="bd" class="del" hidden>Excluir</button><button id="bs" class="ok">Salvar aula</button></div>
+<datalist id="dn"></datalist><datalist id="dm"></datalist>
+</div></div>
+<script>
+var $=function(s){return document.querySelector(s)};
+var K="aulas_v1",D=[];
+try{D=JSON.parse(localStorage.getItem(K))||[]}catch(e){D=[]}
+function store(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+function save(){store();M.mod=Date.now();saveM();sched()}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function brl(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function hh(n){return n.toLocaleString("pt-BR",{maximumFractionDigits:2})}
+function dt(s){return s.split("-").reverse().join("/")}
+var MES=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+var now=new Date(),tab="a",year=now.getFullYear(),q="",ft="",d1="",d2="",editId=null,tipo="Particular",delArm=false;
+
+function sub(){
+  var p=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0"),h=0,v=0;
+  D.forEach(function(x){if(x.d.slice(0,7)===p){h+=x.h;v+=x.h*x.v}});
+  $("#sub").textContent=MES[now.getMonth()]+": "+brl(v)+" em "+hh(h)+" h";
+}
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function hay(x){var a=x.d.split("-");return norm([x.n,x.m,x.t,dt(x.d),MES[a[1]-1],a[0]].join(" "))}
+function item(x){
+  return '<button class="it" data-id="'+x.id+'"><span><b>'+esc(x.n)+'</b><small><span class="chip'+(x.t==="Reforço"?" r":"")+'">'+x.t+'</span>'+esc(x.m)+" · "+dt(x.d)+'</small></span><span class="val"><b>'+brl(x.h*x.v)+'</b><br><small>'+hh(x.h)+" h × "+brl(x.v)+'</small></span></button>';
+}
+function rL(){
+  var tk=norm(q).split(/\s+/).filter(Boolean);
+  var L=D.filter(function(x){
+    if(ft&&x.t!==ft)return false;
+    if(d1&&x.d<d1)return false;
+    if(d2&&x.d>d2)return false;
+    var h=hay(x);
+    return tk.every(function(t){return h.indexOf(t)>-1});
+  }).sort(function(a,b){return b.d.localeCompare(a.d)||b.id-a.id});
+  var H=0,V=0,S={};
+  L.forEach(function(x){
+    var k=x.d.slice(0,7),o=S[k]||(S[k]={n:0,h:0,v:0});
+    o.n++;o.h+=x.h;o.v+=x.h*x.v;H+=x.h;V+=x.h*x.v;
+  });
+  $("#tot").textContent=L.length+(L.length===1?" aula":" aulas")+" · "+hh(H)+" h · "+brl(V);
+  var out="",last="";
+  L.forEach(function(x){
+    var k=x.d.slice(0,7);
+    if(k!==last){
+      last=k;var o=S[k],a=k.split("-");
+      out+='<div class="mh"><span>'+MES[a[1]-1]+" de "+a[0]+'</span><small>'+o.n+(o.n===1?" aula":" aulas")+" · "+hh(o.h)+" h · "+brl(o.v)+"</small></div>";
+    }
+    out+=item(x);
+  });
+  $("#lst").innerHTML=out||'<div class="empty">'+(D.length?"Nenhuma aula encontrada com esses filtros.":"Nenhuma aula registrada ainda.<br>Toque em + para lançar a primeira.")+"</div>";
+}
+function rA(){
+  $("#v").innerHTML='<div class="flt"><input id="q" placeholder="Buscar aluno, turma, matéria ou data (ex.: 17/11)" value="'+esc(q)+'"><select id="ft"><option value="">Todos</option><option'+(ft==="Particular"?" selected":"")+'>Particular</option><option'+(ft==="Reforço"?" selected":"")+'>Reforço</option></select></div>'
+  +'<div class="flt dr"><div><label for="d1">De</label><input id="d1" type="date" value="'+d1+'"></div><div><label for="d2">Até</label><input id="d2" type="date" value="'+d2+'"></div><button id="cl" class="clr">Limpar</button></div>'
+  +'<div class="tot" id="tot"></div><div id="lst"></div>';
+  $("#q").oninput=function(){q=this.value;rL()};
+  $("#ft").onchange=function(){ft=this.value;rL()};
+  $("#d1").onchange=function(){d1=this.value;rL()};
+  $("#d2").onchange=function(){d2=this.value;rL()};
+  $("#cl").onclick=function(){q="";ft="";d1="";d2="";rA()};
+  rL();
+}
+function rF(){
+  var M=[],P=0,R=0,i,T=[0,0,0];
+  for(i=0;i<12;i++)M.push({p:0,r:0,v:0});
+  D.forEach(function(x){var a=x.d.split("-"),o;if(+a[0]!==year)return;o=M[a[1]-1];var val=x.h*x.v;
+    if(x.t==="Particular"){o.p+=x.h;P+=val}else{o.r+=x.h;R+=val}o.v+=val});
+  var tot=P+R,pc=tot?P/tot*100:0,rows="",hp=0,hr=0;
+  M.forEach(function(o,k){hp+=o.p;hr+=o.r;var z=o.p+o.r===0?' class="z"':"";
+    rows+="<tr><td"+z+">"+MES[k].slice(0,3)+"</td><td"+z+">"+hh(o.p)+"</td><td"+z+">"+hh(o.r)+"</td><td"+z+">"+hh(o.p+o.r)+"</td><td"+z+">"+brl(o.v)+"</td></tr>"});
+  $("#v").innerHTML='<div class="yr"><button id="py" aria-label="Ano anterior">‹</button><b>'+year+'</b><button id="ny" aria-label="Próximo ano">›</button></div>'
+  +'<div class="pie"><div class="disc" style="background:'+(tot?"conic-gradient(var(--acc) 0 "+pc+"%,var(--ora) 0)":"var(--line)")+'"></div><div class="lg">'
+  +'<div><span class="dot" style="background:var(--acc)"></span>Particular: <b>'+brl(P)+'</b> ('+hh(pc)+'%)</div>'
+  +'<div><span class="dot" style="background:var(--ora)"></span>Reforço: <b>'+brl(R)+'</b> ('+hh(tot?100-pc:0)+'%)</div></div></div>'
+  +'<div class="tw"><table><thead><tr><th>Mês</th><th>Partic. (h)</th><th>Reforço (h)</th><th>Total (h)</th><th>Ganho</th></tr></thead><tbody>'+rows
+  +"</tbody><tfoot><tr><td>Ano</td><td>"+hh(hp)+"</td><td>"+hh(hr)+"</td><td>"+hh(hp+hr)+"</td><td>"+brl(tot)+"</td></tr></tfoot></table></div>"
+  +'<div id="sy"></div><div class="note" id="bm">Seus dados ficam salvos neste aparelho. Salve um backup de vez em quando.</div><div class="btns"><button id="bk">Salvar backup</button><button id="rs">Restaurar backup</button></div><input type="file" id="fi" accept=".json,application/json" hidden>';
+  $("#py").onclick=function(){year--;rF()};
+  $("#ny").onclick=function(){year++;rF()};
+  $("#bk").onclick=function(){
+    if(window.AndroidApp&&AndroidApp.saveBackup){AndroidApp.saveBackup(JSON.stringify(D));$("#bm").textContent="Backup salvo na pasta Downloads: backup_aulas.json";return}
+    var txt=JSON.stringify(D),b=new Blob([txt],{type:"application/json"});
+    var f;try{f=new File([b],"backup_aulas.json",{type:"application/json"})}catch(e){f=null}
+    if(f&&navigator.canShare&&navigator.canShare({files:[f]})){
+      navigator.share({files:[f],title:"Backup Aulas e Reforço"}).then(function(){$("#bm").textContent="Backup enviado. Escolha \"Salvar em Arquivos\" para guardar o backup_aulas.json."}).catch(function(){});
+      return}
+    var a=document.createElement("a");
+    a.href=URL.createObjectURL(b);a.download="backup_aulas.json";document.body.appendChild(a);a.click();a.remove();
+    $("#bm").textContent="Backup salvo: backup_aulas.json"};
+  $("#rs").onclick=function(){$("#fi").click()};
+  $("#fi").onchange=function(){
+    var f=this.files[0];if(!f)return;var rd=new FileReader();
+    rd.onload=function(){
+      try{var a=JSON.parse(rd.result);if(!Array.isArray(a))throw 0;
+        var ok=a.filter(function(x){return x&&typeof x.d==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(x.d)&&typeof x.n==="string"&&typeof x.m==="string"&&(x.t==="Particular"||x.t==="Reforço")&&isFinite(x.h)&&isFinite(x.v)&&isFinite(x.id)});
+        if(!ok.length)throw 0;D=ok;save();render();
+        $("#bm").textContent=ok.length+" aulas restauradas."}
+      catch(e){$("#bm").textContent="Arquivo inválido. Escolha um backup_aulas.json salvo por este app."}};
+    rd.readAsText(f)};
+}
+function render(){sub();document.querySelectorAll("nav button").forEach(function(b){b.classList.toggle("on",b.dataset.t===tab)});tab==="a"?rA():(rF(),rS())}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){tab=b.dataset.t;render()}});
+$("#v").addEventListener("click",function(e){var b=e.target.closest(".it");if(b)openF(+b.dataset.id)});
+
+function setTipo(t){tipo=t;document.querySelectorAll("#ft2 button").forEach(function(b){b.classList.toggle("on",b.dataset.v===t)})}
+document.querySelectorAll("#ft2 button").forEach(function(b){b.onclick=function(){setTipo(b.dataset.v)}});
+function gain(){var h=parseFloat($("#fh").value),v=parseFloat($("#fv").value);$("#g").textContent=brl((h>0&&v>=0)?h*v:0)}
+$("#fh").oninput=gain;$("#fv").oninput=gain;
+function uniq(k){var s={};D.forEach(function(x){s[x[k]]=1});return Object.keys(s).sort()}
+function openF(id){
+  editId=id||null;delArm=false;
+  var x=D.filter(function(y){return y.id===id})[0];
+  $("#ttl").textContent=x?"Editar aula":"Nova aula";
+  $("#fd").value=x?x.d:now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+  $("#fn").value=x?x.n:"";$("#fm").value=x?x.m:"";$("#fh").value=x?x.h:"";$("#fv").value=x?x.v:"";
+  setTipo(x?x.t:"Particular");$("#err").textContent="";
+  $("#bd").hidden=!x;$("#bd").textContent="Excluir";
+  $("#dn").innerHTML=uniq("n").map(function(s){return'<option value="'+esc(s)+'">'}).join("");
+  $("#dm").innerHTML=uniq("m").map(function(s){return'<option value="'+esc(s)+'">'}).join("");
+  gain();$("#ov").hidden=false;
+}
+$("#fn").onchange=function(){
+  if(editId||$("#fv").value)return;
+  var n=this.value.trim().toLowerCase(),l=D.filter(function(x){return x.n.toLowerCase()===n}).sort(function(a,b){return b.id-a.id})[0];
+  if(l){$("#fv").value=l.v;if(!$("#fm").value)$("#fm").value=l.m;setTipo(l.t);gain()}
+};
+function closeF(){$("#ov").hidden=true}
+$("#fab").onclick=function(){openF()};
+$("#bc").onclick=closeF;
+$("#ov").addEventListener("click",function(e){if(e.target===this)closeF()});
+$("#bd").onclick=function(){
+  if(!delArm){delArm=true;this.textContent="Confirmar exclusão";return}
+  D=D.filter(function(y){return y.id!==editId});save();closeF();render();
+};
+$("#bs").onclick=function(){
+  var d=$("#fd").value,n=$("#fn").value.trim(),m=$("#fm").value.trim(),h=parseFloat($("#fh").value),v=parseFloat($("#fv").value),y=+d.slice(0,4),e="";
+  if(!d||y<2000||y>2100)e="Informe uma data válida.";
+  else if(!n)e="Informe o nome do aluno ou da turma.";
+  else if(!m)e="Informe a matéria.";
+  else if(!(h>=0.25&&h<=24))e="As horas devem estar entre 0,25 e 24.";
+  else if(!(v>=0&&v<=10000))e="O valor da hora deve estar entre 0 e 10.000.";
+  if(e){$("#err").textContent=e;return}
+  var o={id:editId||Date.now(),d:d,n:n,t:tipo,m:m,h:h,v:v};
+  if(editId)D=D.map(function(y){return y.id===editId?o:y});else D.push(o);
+  save();closeF();render();
+};
+/* ===== Sincronização (Supabase) ===== */
+var SB_URL="https://wdxywbbqoqzemqdgbwcb.supabase.co",SB_KEY="sb_publishable_vCVL6wFpraOPqqIGdJOO3w_VRb7gDwT";
+var MK="aulas_sync_v1",M={},SM="",busy=false,T=null;
+try{M=JSON.parse(localStorage.getItem(MK))||{}}catch(e){M={}}
+if(!M.mod&&D.length)M.mod=1;
+function saveM(){try{localStorage.setItem(MK,JSON.stringify(M))}catch(e){}}
+function sched(){clearTimeout(T);if(M.s)T=setTimeout(function(){sync()},1500)}
+function msg(t){SM=t;var e=$("#sm");if(e)e.textContent=t}
+function okItem(x){return x&&typeof x.d==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(x.d)&&typeof x.n==="string"&&typeof x.m==="string"&&(x.t==="Particular"||x.t==="Reforço")&&isFinite(x.h)&&isFinite(x.v)&&isFinite(x.id)}
+function merge(a,b){var s={},o=[];a.forEach(function(x){s[x.id]=1;o.push(x)});(b||[]).filter(okItem).forEach(function(x){if(!s[x.id]){s[x.id]=1;o.push(x)}});return o}
+function api(path,o){
+  o=o||{};var h={apikey:SB_KEY,"Content-Type":"application/json"};
+  if(o.tok)h.Authorization="Bearer "+o.tok;
+  if(o.h)for(var k in o.h)h[k]=o.h[k];
+  return fetch(SB_URL+path,{method:o.m||"GET",headers:h,body:o.b?JSON.stringify(o.b):undefined}).then(function(r){
+    return r.text().then(function(t){
+      var j=null;try{j=JSON.parse(t)}catch(e){}
+      if(!r.ok){var er=new Error((j&&(j.msg||j.error_description||j.message||j.error))||("Erro "+r.status));er.status=r.status;throw er}
+      return j})})}
+function setSess(j){M.s={a:j.access_token,r:j.refresh_token,x:Date.now()+(j.expires_in||3600)*1000-60000,u:j.user.id,e:j.user.email};saveM()}
+function tok(){
+  if(M.s.x>Date.now())return Promise.resolve(M.s.a);
+  return api("/auth/v1/token?grant_type=refresh_token",{m:"POST",b:{refresh_token:M.s.r}}).then(function(j){setSess(j);return M.s.a})
+  .catch(function(e){if(e.status===400||e.status===401){M.s=null;saveM();rS()}throw e})}
+function fmtErr(e){
+  var t=String(e&&e.message||e);
+  if(/failed to fetch|network|load failed/i.test(t))return "Sem internet. Seus dados continuam salvos neste aparelho.";
+  if(/invalid login/i.test(t))return "E-mail ou senha incorretos.";
+  if(/already registered|already exists/i.test(t))return "Esse e-mail já tem conta. Toque em Entrar.";
+  if(/password/i.test(t)&&/6|short|weak/i.test(t))return "A senha precisa ter pelo menos 6 caracteres.";
+  return t}
+function push(t){
+  var ts=M.mod||Date.now();
+  return api("/rest/v1/dados?on_conflict=user_id",{m:"POST",tok:t,h:{Prefer:"resolution=merge-duplicates,return=minimal"},b:{user_id:M.s.u,conteudo:D,atualizado_em:new Date(ts).toISOString()}}).then(function(){M.sy=ts})}
+function sync(manual){
+  if(!M.s)return Promise.resolve();
+  if(busy)return Promise.resolve();
+  if(!navigator.onLine){if(manual)msg("Sem internet. Seus dados continuam salvos neste aparelho.");return Promise.resolve()}
+  busy=true;if(manual)msg("Sincronizando...");
+  return tok().then(function(t){
+    return api("/rest/v1/dados?select=conteudo,atualizado_em&user_id=eq."+M.s.u,{tok:t}).then(function(rows){
+      if(!Array.isArray(rows))throw new Error("Resposta inesperada do servidor.");
+      var r=rows[0],sy=M.sy||0,lc=(M.mod||0)>sy;
+      if(!r||!Array.isArray(r.conteudo))return lc||!r?push(t):0;
+      var rt=Date.parse(r.atualizado_em)||0,rc=rt>sy;
+      if(lc&&rc){D=merge(D,r.conteudo);M.mod=Date.now();store();saveM();return push(t).then(function(){render()})}
+      if(rc){D=r.conteudo.filter(okItem);M.mod=rt;M.sy=rt;store();saveM();render();return}
+      if(lc)return push(t);
+    })}).then(function(){
+      M.last=Date.now();saveM();
+      var d=new Date(M.last);
+      msg("Sincronizado em "+String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" às "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")+".")
+    }).catch(function(e){msg(fmtErr(e))}).then(function(){busy=false})}
+function auth(kind){
+  var em=$("#sye").value.trim(),pw=$("#syp").value;
+  if(!em||!pw){msg("Preencha e-mail e senha.");return}
+  msg("Aguarde...");
+  var p=kind==="up"?api("/auth/v1/signup",{m:"POST",b:{email:em,password:pw}}):api("/auth/v1/token?grant_type=password",{m:"POST",b:{email:em,password:pw}});
+  p.then(function(j){
+    if(!j||!j.access_token){msg("Conta criada. Confirme o e-mail que você recebeu e depois toque em Entrar.");return}
+    setSess(j);rS();return sync(true)
+  }).catch(function(e){msg(fmtErr(e))})}
+function rS(){
+  var e=$("#sy");if(!e)return;
+  if(M.s){
+    e.innerHTML='<div class="mh"><span>Sincronização</span><small>'+esc(M.s.e)+'</small></div><div class="note" id="sm"></div><div class="btns"><button id="sn">Sincronizar agora</button><button id="so">Sair</button></div>';
+    $("#sn").onclick=function(){sync(true)};
+    $("#so").onclick=function(){M.s=null;saveM();msg("Você saiu. Os dados continuam neste aparelho.");rS()};
+  }else{
+    e.innerHTML='<div class="mh"><span>Sincronizar entre aparelhos</span></div><div class="note">Entre com o mesmo e-mail e senha no Android e no iPhone para manter os dados iguais.</div><input id="sye" type="email" placeholder="E-mail" autocomplete="username"><input id="syp" type="password" placeholder="Senha (mínimo 6 caracteres)" autocomplete="current-password" style="margin-top:8px"><div class="err" id="sm"></div><div class="btns"><button id="si" class="ok">Entrar</button><button id="sc">Criar conta</button></div>';
+    $("#si").onclick=function(){auth("in")};
+    $("#sc").onclick=function(){auth("up")};
+  }
+  msg(SM)}
+window.addEventListener("online",function(){sync()});
+document.addEventListener("visibilitychange",function(){if(!document.hidden)sync()});
+
+render();
+sync();
+if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+</script></body></html>
